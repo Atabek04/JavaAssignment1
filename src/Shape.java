@@ -1,8 +1,8 @@
-import java.util.ArrayList;
 import java.util.List;
+import java.util.ArrayList;
 
-class Shape {
-    private final List<Point> points;
+public class Shape {
+    private List<Point> points;
 
     public Shape() {
         points = new ArrayList<>();
@@ -17,29 +17,35 @@ class Shape {
     }
 
     public double calculatePerimeter() {
-        double perimeter = 0;
-        for (int i = 0; i < points.size(); i++) {
-            Point current = points.get(i);
-            Point next = points.get((i + 1) % points.size());
-            perimeter += current.distance(next);
+        double perimeter = 0.0;
+        for (int i = 0; i < points.size()-1; i++) {
+            perimeter += points.get(i).distance(points.get(i+1));
         }
+        perimeter += points.get(points.size()-1).distance(points.get(0));
         return perimeter;
     }
 
-    public double getLongestSide() {
-        double longest = 0;
-        for (int i = 0; i < points.size(); i++) {
-            Point current = points.get(i);
-            Point next = points.get((i + 1) % points.size());
-            double distance = current.distance(next);
-            if (distance > longest) {
-                longest = distance;
+    public double longestSide() {
+        double longest = 0.0;
+        for (int i = 0; i < points.size()-1; i++) {
+            double sideLength = points.get(i).distance(points.get(i+1));
+            if (sideLength > longest) {
+                longest = sideLength;
             }
+        }
+        double lastSideLength = points.get(points.size()-1).distance(points.get(0));
+        if (lastSideLength > longest) {
+            longest = lastSideLength;
         }
         return longest;
     }
 
-    public double getAverageLength() {
-        return calculatePerimeter() / points.size();
+    public double averageLength() {
+        double sum = 0.0;
+        for (int i = 0; i < points.size()-1; i++) {
+            sum += points.get(i).distance(points.get(i+1));
+        }
+        sum += points.get(points.size()-1).distance(points.get(0));
+        return sum / points.size();
     }
 }

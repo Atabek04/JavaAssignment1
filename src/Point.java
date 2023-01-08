@@ -1,4 +1,4 @@
-class Point {
+public class Point {
     private double x;
     private double y;
 
@@ -24,8 +24,8 @@ class Point {
     }
 
     public double distance(Point other) {
-        double dx = this.x - other.x;
-        double dy = this.y - other.y;
-        return Math.sqrt(dx * dx + dy * dy);
+        double dx = x - other.x;
+        double dy = y - other.y;
+        return Math.sqrt(dx*dx + dy*dy);
     }
 }
